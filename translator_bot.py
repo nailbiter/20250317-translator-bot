@@ -43,10 +43,9 @@ def handle_all_messages(message):
         logging.warning(result)
 
         # Respond to the message
-        if result.lang == "uk":
-            text = translator.translate(
-                message_text, src='uk', dest='zh-CN'
-            ).text
+        src = result.lang
+        if src in ("uk", "ru"):
+            text = translator.translate(message_text, src=src, dest="zh-CN").text
             bot.reply_to(message, f"{username}说了:\n{text}")
 
     except Exception as e:
